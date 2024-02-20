@@ -1,0 +1,16 @@
+[data-page="catalogue"] {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0;
+	/* margin-top: var(--espace-5); */
+
+	@media screen and (max-width: 1024px) {
+		& .modal {
+			padding: var(--espace-3);
+
+			.modal__filtres {
+				padding: var(--espace-3) var(--espace-1);
+			}
+		}
+	}
+}

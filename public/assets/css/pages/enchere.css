@@ -1,0 +1,225 @@
+[data-page="enchere"] {
+	padding: 0 var(--espace-10) var(--espace-10) var(--espace-10);
+
+	& .images {
+		flex: 5;
+		display: flex;
+		flex-direction: row;
+		margin-right: var(--espace-10);
+
+		& .images__thumbnails-container {
+			display: flex;
+			flex-direction: column;
+			gap: var(--espace-2);
+			margin-right: var(--espace-2);
+
+			& .images__thumbnails-item {
+				min-width: 15vh;
+				min-height: 15vh;
+				max-width: 10vw;
+				max-height: 10vw;
+				background-color: var(--coul-neutre);
+				height: auto;
+				padding: var(--espace-half);
+				aspect-ratio: 1 / 1;
+				cursor: pointer;
+			}
+
+			& .images__thumbnails-item--active {
+				border: 1px solid var(--coul-principale);
+			}
+		}
+
+		& .images__main {
+			background-color: var(--coul-neutre);
+			padding: var(--espace-2);
+			width: 70%;
+			aspect-ratio: 1 /1;
+		}
+	}
+
+	& .mise {
+		flex: 3;
+		display: flex;
+		flex-direction: column;
+		gap: var(--espace-half);
+		align-items: flex-start;
+		border: 0.5px solid var(--coul-principale);
+		padding: var(--espace-2);
+		padding-bottom: var(--espace-1);
+
+		& .afterh1 {
+			margin-bottom: var(--espace-1);
+		}
+
+		& .favoris {
+			margin: var(--espace-half) auto 0;
+		}
+		& form {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+
+			& .msg-error {
+				color: var(--coul-texte-erreur);
+
+				& li {
+					padding: var(--espace-quart) 0;
+					line-height: 1.4rem;
+					text-decoration: none;
+				}
+			}
+
+			& fieldset {
+				padding: 0;
+				margin-bottom: var(--espace-1);
+			}
+
+			& input {
+				width: 100%;
+			}
+
+			& button {
+				margin-top: var(--espace-1);
+			}
+		}
+
+		& .form-mise {
+			border-top: 0.5px solid var(--coul-secondaire);
+			margin-top: var(--espace-1);
+			padding-top: var(--espace-1);
+		}
+
+		& .mise__info {
+			color: var(--coul-secondaire);
+		}
+
+		& table {
+			text-align: left;
+
+			& tr {
+				margin-bottom: var(--espace-1);
+			}
+
+			& th {
+				color: var(--coul-secondaire);
+				height: var(--espace-2);
+				padding-right: var(--espace-1half);
+				vertical-align: middle;
+			}
+
+			& td {
+				min-width: 10rem;
+				vertical-align: middle;
+				height: var(--espace-2);
+			}
+			& .mise__prix-courant {
+				font-family: var(--police-titre);
+				font-size: var(--texte-lg);
+			}
+		}
+
+		& .mise-lable {
+			font-size: var(--texte-sm);
+			margin-bottom: var(--espace-half);
+		}
+	}
+
+	& .description {
+		flex: 100%;
+
+		& .description__item {
+			padding: var(--espace-2) 0 var(--espace-1) 0;
+		}
+
+		& .description__item:not(:last-child) {
+			border-bottom: 0.5px solid var(--coul-accent);
+		}
+	}
+
+	& .promo {
+		border-top: 1px solid var(--coul-principale);
+		margin-top: var(--espace-3);
+		padding-top: var(--espace-4);
+
+		& .item {
+			width: calc(20% - var(--espace-1));
+		}
+	}
+
+	@media screen and (max-width: 1024px) {
+		padding: 0 var(--espace-5) var(--espace-5) var(--espace-5);
+
+		& .images {
+			width: calc(60% - 4rem);
+			flex-direction: column;
+			margin-right: 0;
+			gap: var(--espace-2);
+
+			& .images__thumbnails-container {
+				/* display: none !important; */
+
+				display: flex;
+				flex-direction: row;
+
+				& .images__thumbnails-item {
+					min-width: 8vh;
+					min-height: 8vh;
+					max-width: 10vw;
+					max-height: 10vw;
+					width: 20%;
+				}
+			}
+
+			& .images__main {
+				width: 100%;
+			}
+		}
+
+		& .mise {
+			width: 30%;
+
+			& h1 {
+				font-size: var(--texte-lg);
+			}
+
+			& form {
+				margin-top: var(--espace-half);
+				padding-top: 0;
+			}
+
+			& .afterh1 {
+				margin-bottom: var(--espace-half);
+			}
+		}
+
+		& .description {
+			/* flex: 30%; */
+
+			margin: var(--espace-1);
+			& .description__item {
+				padding: var(--espace-1) 0;
+			}
+		}
+	}
+
+	@media screen and (max-width: 480px) {
+		padding: var(--espace-1) 0;
+
+		& .images,
+		.mise {
+			width: 100%;
+			margin: 0 var(--espace-1);
+			gap: var(--espace-1);
+
+			& .images__main {
+				padding: var(--espace-1);
+			}
+		}
+
+		& .promo {
+			padding: var(--espace-4) var(--espace-1) var(--espace-6)
+				var(--espace-1);
+		}
+	}
+}

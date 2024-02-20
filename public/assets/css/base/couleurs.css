@@ -1,0 +1,15 @@
+:root {
+	--coul-principale: #2b4865;
+	--coul-secondaire: #256d85;
+	--coul-accent: hsl(166, 60%, 73%);
+	--coul-neutre: #f4f5f6;
+
+	--coul-texte: #002b5b;
+	--coul-texte-clair: #ffffff;
+	--coul-texte-accent: var(--coul-accent);
+	--coul-texte-erreur: #d81818;
+	--coul-texte-succes: #19760d;
+
+	--coul-arriere-plan: var(--coul-texte-clair);
+	--coul-modal: rgba(255, 255, 255, 0.9);
+}

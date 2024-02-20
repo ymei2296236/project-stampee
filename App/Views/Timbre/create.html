@@ -1,0 +1,87 @@
+{% extends "base.php" %}
+
+{% block title %}Créer une enchère{% endblock %}
+
+{% block body %}
+<main class="formulaire">
+    <h1>Créer une enchère</h1>
+    <span>Étape 1/2 : entrer informations du timbre</span>
+
+    {% if msg %}
+    <span class="msg-succes">
+        {{ msg }}
+    </span>
+    {% endif %}
+
+    {% if errors is defined %}
+    <ul class="msg-error">
+        {{ errors | raw }}
+    </ul>
+    {% endif %}
+
+    <form class="formulaire__form" enctype="multipart/form-data" action="store" method="post" novalidate>
+
+        <label for="nom">Nom <i class="fa-solid fa-star-of-life fa-2xs"></i></label>
+        <input type="text" id="nom" name="nom" value="{{timbre.nom}}"></input>  
+
+        <label for="nom_2">Nom - ligne 2</label>
+        <input type="text" id="nom_2" name="nom_2" value="{{timbre.nom_2}}"></input>  
+
+        <label for="etat">État <i class="fa-solid fa-star-of-life fa-2xs"></i></label>
+        <select name="etat_id" id="etat">
+            <option value="" >Faire un choix</option>
+            {% for etat in etats %}
+            <option value="{{etat.id}}" {% if etat.id == timbre.etat_id %} selected {% endif %}>{{etat.nom}}</option>
+            {% endfor %}
+        </select>
+        
+
+        <label for="dimension">Dimension <i class="fa-solid fa-star-of-life fa-2xs"></i></label>
+        <select name="dimension_id" id="dimension">
+            <option value="" >Faire un choix</option>
+            {% for dimension in dimensions %}
+            <option value="{{dimension.id}}" {% if dimension.id == timbre.dimension_id %} selected {% endif %}>{{dimension.nom}}</option>
+            {% endfor %}
+        </select>
+
+        <label for="pays">Pays <i class="fa-solid fa-star-of-life fa-2xs"></i></label>
+        <select name="pays_id" id="pays">
+            <option value="" >Faire un choix</option>
+            {% for pays in tousPays %}
+            <option value="{{pays.id}}" {% if pays.id == timbre.pays_id %} selected {% endif %}>{{pays.nom}}</option>
+            {% endfor %}
+        </select>
+
+        <label for="certification">Certifié ?
+        <input type="checkbox" id="certification" name="certification" value="1" {% if timbre.certification %} checked {% endif %} ></input>  
+        </label>
+
+        <label for="date_emission">Date d'émission</label>
+        <input type="date" id="date_emission" name="date_emission" {% if timbre.date_emission %} value="{{timbre.date_emission}}" {% else %} value="2001-01-01" {% endif %} ></input>  
+
+
+        <label for="couleur">En couleur ?
+        <input type="checkbox" id="couleur" name="couleur" value="1" {% if timbre.couleur %} checked {% endif %} ></input>  
+        </label>
+    
+
+        <label for="tirage">Tirage</label>
+        <input type="number" id="tirage" name="tirage" {% if timbre.tirage %} value="{{timbre.tirage}}" {% else %}value="0" {% endif %}> </input>  
+        
+        <label for="extrait">Extrait</label>
+        <textarea id="extrait" name="extrait" cols=40 rows=8>{{timbre.extrait}}</textarea>
+        
+        <label for="img" > Téléverser une ou plusieurs images<span> (trois au maximum)</span> <i class="fa-solid fa-star-of-life fa-2xs"></i></label>
+        <input type="file" id="img" name="img[]" multiple/></input> 
+
+        
+
+        <button type="submit" class="btn btn--principal" name="upload" aria-label="Continuer">
+            Continuer
+        </button>
+        
+    </form>
+    <a class="btn btn--secondaire" href="{{url_racine}}profil/index">Annuler</a>
+</main>
+
+{% endblock %}

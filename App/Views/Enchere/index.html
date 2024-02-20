@@ -1,0 +1,140 @@
+{% extends "base.php" %}
+
+{% block title %}Votre Compte{% endblock %}
+
+{% block body %}
+<main  data-js-component="Router" data-page="catalogue">
+    <section class="modal modal--ferme" data-js-modal="exit">
+        <span class="modal__icon"><i data-js-modal="exit" class="fa-solid fa-xmark"></i></span>
+
+        <div class="modal__filtres">
+            <div class="filtres__titre-titre">
+                <i class="fa-solid fa-sliders"></i>
+                <h3 >Filtres</h3>
+            </div>
+            <form class="filtres__form" action="select" method="post"  data-js-filtres="modal" >         
+            </form>
+        </div>
+    </section>
+    <aside class="filtres-ecran">
+        <div class="filtres__titre-titre">
+            <i class="fa-solid fa-sliders"></i>
+            <h3 >Filtres</h3>
+        </div>
+        <form class="filtres__form" action="select" method="post"  data-js-filtres="ecran">
+            <div class="filtres__btns">
+                <button type="submit" class="btn btn--principal" aria-label="Appliquer les filtres">
+                    Appliquer les filtres 
+                </button>
+                <a href="{{url_racine}}enchere/index" class="btn btn--icon-text" > <i class="fa-solid fa-trash"></i>Effacer tous les filtres</a>
+            </div>
+            <fieldset>
+                <legend>Condition</legend>
+                {% for etat in etats %}
+                <input type="checkbox" id="etat{{etat.id}}" name="etat[]" value="{{ etat.nom }}" {% if etat.nom in filtres.etat %} checked {% endif %}>
+                <label for="etat{{etat.id}}">{{ etat.nom }}</label>
+                {% endfor %}
+            </fieldset>
+
+            <fieldset>
+                <label for="pays" class="labelBold">Pays</label>
+                <select name="pays" id="pays">
+                    <option value="">Faire un choix</option>
+                    {% for pays in paysTous %}
+                    <option value="{{ pays.nom }}" {% if pays.nom in filtres.pays %} selected {% endif %}>{{ pays.nom }}</option>
+                    {% endfor %}
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend>Prix</legend>
+                <input type="checkbox" id="prix1" name="prix[]" value=">=0.01 and <=0.99" {% if ">=0.01 and <=0.99" in filtres.prix %} checked {% endif %}>
+                <label for="prix1">1 ¢ - 99 ¢</label>
+                <input type="checkbox" id="prix2" name="prix[]" value=">=1 and <=9.99"  {% if ">=1 and <=9.99" in filtres.prix %} checked {% endif %}>
+                <label for="prix2">1,00 $  - 9,99 $</label>
+                <input type="checkbox" id="prix3" name="prix[]" value=">=10 and <=24.99"  {% if ">=10 and <=24.99" in filtres.prix %} checked {% endif %}>
+                <label for="prix3">10,00 $  - 24,99 $</label>
+                <input type="checkbox" id="prix4" name="prix[]" value=">=25 and <=49.99"  {% if ">=25 and <=49.99" in filtres.prix %} checked {% endif %}>
+                <label for="prix4">25,00 $ - 49,99 $</label>
+                <input type="checkbox" id="prix5" name="prix[]" value=">=50" {% if ">=50" in filtres.prix %} checked {% endif %}>
+                <label for="prix5">50 $ et plus</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Dimension</legend>
+                {% for dimension in dimensions %}
+                <input type="checkbox" id="dimension{{loop.index}}" name="dimension[]" value="{{ dimension.nom }}" {% if dimension.nom in filtres.dimension %} checked {% endif %}>
+                <label for="dimension{{loop.index}}">{{ dimension.nom }}</label>
+                {% endfor %}
+
+            </fieldset>
+
+        </form>
+    </aside>
+
+    <div class="liste">
+        
+        <div class="tri">
+            <div class="filtres-modal-btns" >
+                <div class="afficheModal" data-js-component="Filtrage">
+                    <i class="fa-solid fa-sliders"></i>
+                    <h3 >Filtres</h3>
+                </div>
+                <a href="{{url_racine}}enchere/index" class="btn btn--icon-text effacerFiltres" > <i class="fa-solid fa-trash"></i>Effacer tous les filtres</a>
+            </div>
+            <p data-js-resultat class="note">{{resultats}}</p>
+            <form action="catalogue.html" data-js-component="TrierEncheres">
+                <fieldset class="tri__fieldset">
+                    <label class="labelBold" for="tri">Trier par</label>
+                    <select name="tri" id="tri" >
+                        <option value="">Faire un choix</option>
+                        <option value="selectEncheresNouveautes">Nouveautés</option>
+                        <option value="selectEncheresEnCours">Enchères en cours</option>
+                        <option value="selectEncheresArchivees">Enchères archivées</option>
+                        <option value="selectEncheresPrixBas">Prix le plus bas</option>
+                        <option value="selectEncheresPrixEleve">Prix le plus élévé</option>
+                    </select>
+                </fieldset>
+            </form>
+        </div>
+        <div data-js-listeEncheres class="liste__contenu">   
+            {% for enchere in encheres %}
+            <div class="item">
+                <a href="{{url_racine}}enchere/show/{{enchere.enchere_id}}" class="item__lien">
+                    {% if enchere.coup_de_coeur == 1 %}
+                    <div class="item__coups-de-coeur item__coups-de-coeur--yes">
+                        <i class="fa-solid fa-heart"></i>
+                        <p class="note">Coups de coeur du Lord</p>
+                    </div>
+                    {% else %}
+                    <div class="item__coups-de-coeur">
+                    </div>
+                    {% endif %}
+                    <div class="item__contenu" data-js-tri>
+                        <div class="item__img"><img src="{{url_racine}}assets/img/jpg/{{ enchere.image }}" alt="Image du timbre"></div>
+                        <p class="item__description">{{enchere.timbre_nom}} {{enchere.timbre_nom_2}}</p>
+
+                    {% if enchere.archivee == true %}
+                        <div class="prix prix--archive">
+                            <p class="prix__description prix__description--archive">Mise finale</p>
+                            <p class="prix__montant prix__montant--archive">{{enchere.mise_courante}}<small class="prix_decimal"> $</small></p>
+                        </div>
+                        <button class="btn btn--icon-text btn--disabled "><i class="fa-solid fa-box-archive"></i>Enchère terminée</button>
+                    {% else %}
+                        <div class="prix">
+                            <p class="prix__description">Mise courante</p>
+                            <p class="prix__montant">{{enchere.mise_courante}}<small class="prix_decimal"> $</small></p>
+                        </div>
+                        <span class="btn btn--principal">Miser</span>
+                    {% endif %}
+
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</main>
+
+{% endblock %}

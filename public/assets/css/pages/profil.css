@@ -1,0 +1,91 @@
+[data-page="profil"] {
+	display: flex;
+	flex-direction: column;
+	padding: var(--espace-2) var(--espace-5) var(--espace-5) var(--espace-5);
+
+	& h1 {
+		text-align: center;
+		margin: var(--espace-1);
+		flex: 1;
+	}
+
+	& .actions {
+		margin: auto;
+	}
+	& .col {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: var(--espace-4);
+		margin-top: var(--espace-2);
+
+		& .listeTimbres__liste {
+			display: flex;
+			flex-direction: column;
+			gap: var(--espace-2);
+			border: 0.5px solid var(--coul-principale);
+			padding: var(--espace-2);
+			flex: 1;
+
+			& .listeTimbres__item {
+				display: flex;
+				align-items: flex-start;
+				gap: var(--espace-2);
+
+				& .listeTimbres__timbre {
+					width: 8rem;
+
+					& .listeTimbres__image {
+						height: 8rem;
+						aspect-ratio: 1/1;
+						background-color: var(--coul-neutre);
+						padding: var(--espace-half);
+						margin-bottom: var(--espace-1);
+					}
+				}
+			}
+
+			& .listeTimbres__item:not(:last-child) {
+				padding-bottom: var(--espace-1);
+				border-bottom: 0.5px solid var(--coul-principale);
+			}
+
+			& .listeTimbres__actions {
+				display: flex;
+				flex-direction: column;
+				gap: var(--espace-half);
+
+				.listeTimbres__btn {
+					margin: var(--espace-1) 0;
+				}
+			}
+		}
+	}
+
+	@media screen and (max-width: 1024px) {
+		padding: var(--espace-2);
+		margin-bottom: var(--espace-2);
+
+		& .col {
+			gap: var(--espace-1);
+
+			& .listeTimbres__liste {
+				gap: var(--espace-1);
+				padding: var(--espace-1);
+
+				& .listeTimbres__item {
+					gap: var(--espace-1);
+
+					& .listeTimbres__timbre {
+						width: 5rem;
+
+						& .listeTimbres__image {
+							height: 5rem;
+							padding: var(--espace-quart);
+						}
+					}
+				}
+			}
+		}
+	}
+}

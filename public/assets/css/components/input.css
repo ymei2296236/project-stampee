@@ -1,0 +1,125 @@
+fieldset {
+	display: flex;
+	flex-wrap: wrap;
+	font-family: var(--police-texte);
+	font-size: var(--texte-xs);
+	color: var(--coul-texte);
+	margin-top: var(--espace-half);
+	padding: var(--espace-half) var(--espace-1);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="datetime-local"],
+input[type="date"] {
+	padding: var(--espace-half);
+	font-family: var(--police-texte);
+	color: var(--coul-texte);
+	height: 3rem;
+	border: 1px solid var(--coul-principale);
+	outline-offset: -1px;
+	font-size: var(--texte-sm);
+}
+
+input[type="text"]::placeholder {
+	color: var(--coul-secondaire);
+	font-family: var(--police-texte);
+	font-size: var(--texte-sm);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+	outline: none;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+	opacity: 0;
+	width: 0;
+	margin: 0;
+}
+
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+	padding: var(--espace-half) var(--espace-1);
+	border-radius: 50px;
+	border: 2px solid var(--coul-arriere-plan);
+	margin-right: var(--espace-half);
+	margin-top: var(--espace-half);
+	transition: all 160ms ease-in-out;
+	cursor: pointer;
+	background-color: var(--coul-arriere-plan);
+}
+
+input[type="radio"] + label {
+	padding: var(--espace-half) var(--espace-quart);
+}
+
+input[type="checkbox"]:checked + label {
+	border: 2px solid var(--coul-accent);
+}
+
+input[type="radio"]:checked + label {
+	color: var(--coul-secondaire);
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+select {
+	padding: var(--espace-3quarts);
+	border-radius: 2px;
+	outline: 1px solid transparent;
+	background: var(--coul-arriere-plan);
+	border: 0.5px solid var(--coul-principale);
+	font-size: var(--texte-sm);
+	color: var(--coul-texte);
+}
+
+option {
+	text-transform: capitalize;
+}
+
+select:focus {
+	border: 1px solid var(--coul-accent);
+	outline: 1px solid var(--coul-accent);
+}
+
+.greyText {
+	background-color: var(--coul-secondaire);
+}
+
+legend,
+.labelBold {
+	flex: 100%;
+	font-family: var(--police-texte);
+	font-size: var(--texte-xs);
+	font-weight: bold;
+	padding-top: var(--espace-half);
+	padding-bottom: var(--espace-half);
+	display: inline;
+	float: left;
+}
+
+legend > select,
+.labelBold > select {
+	float: left;
+	display: inline;
+}
+
+.legend-inline {
+	flex-wrap: nowrap;
+}
+
+.placeholder {
+	color: var(--coul-secondaire);
+	background-color: red;
+	text-transform: uppercase;
+}
+
+@media screen and (max-width: 480px) {
+	input[type="radio"] + label {
+		padding: var(--espace-half) var(--espace-1) var(--espace-3)
+			var(--espace-1);
+	}
+}
